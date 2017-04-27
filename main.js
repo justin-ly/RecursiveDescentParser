@@ -26,7 +26,9 @@ function start() {
     document.getElementById("result").innerHTML = "The input " + input + " is valid.";
 
     EXP();
-    if (input.charAt(pos) != '$'){
+
+    //An expression must end with '$' to be valid.
+    if (input.charAt(pos) != '$') {
         invalid();
     }
     document.getElementById("result").style.visibility = "initial";
@@ -39,19 +41,18 @@ function EXP() {
 }
 
 
-function FACTOR() {
-    DIGIT();
-    //console.log('Returned from digit -> factor: ', input.charAt(pos));
+function TERM() {
+    FACTOR();
     if (input.charAt(pos) == '*' || input.charAt(pos) == '/') {
         pos++;
         FACTOR();
     }
 }
 
-function DIGIT() {
-    //console.log('Correctly called digit: ', input.charAt(pos));
-    if (input.charAt(pos) in ['0', '1', '2', '3']) pos++;
-    else if (input.charAt(pos) == '(') {
+
+// FACTOR ::= (EXP) | DIGIT
+function FACTOR() {
+    if (input.charAt(pos) == '(') {
         pos++;
         EXP();
         //console.log('Value after returning from EXP: ', input.charAt(pos));
@@ -62,6 +63,16 @@ function DIGIT() {
             invalid();
         }
     }
+    else { 
+        DIGIT();
+    }
+    //console.log('Returned from digit -> factor: ', input.charAt(pos));
+}
+
+
+function DIGIT() {
+    //console.log('Correctly called digit: ', input.charAt(pos));
+    if (input.charAt(pos) in ['0', '1', '2', '3']) pos++;
     else invalid();
 }
 
