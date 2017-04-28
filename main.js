@@ -11,6 +11,8 @@
     INVALID TESTS:
     1. (((3*3$
     2. (3*3)/3*3)$
+
+    Ex: http://athena.ecs.csus.edu/~rdp135/rdr/rdr1.php
 */
 
 let input;
@@ -37,7 +39,7 @@ function start() {
 
 // EXP ::= TERM {(+|-)TERM}
 function EXP() {
-    FACTOR();
+    TERM();
 }
 
 
@@ -45,7 +47,7 @@ function TERM() {
     FACTOR();
     if (input.charAt(pos) == '*' || input.charAt(pos) == '/') {
         pos++;
-        FACTOR();
+        TERM();
     }
 }
 
@@ -55,7 +57,6 @@ function FACTOR() {
     if (input.charAt(pos) == '(') {
         pos++;
         EXP();
-        //console.log('Value after returning from EXP: ', input.charAt(pos));
         if (input.charAt(pos) == ')') {
             pos++;
         }
@@ -66,7 +67,6 @@ function FACTOR() {
     else { 
         DIGIT();
     }
-    //console.log('Returned from digit -> factor: ', input.charAt(pos));
 }
 
 
