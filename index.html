@@ -1,12 +1,22 @@
 <!doctype html>
 <html>
 
+<head>
+    <link rel="stylesheet" href="main.css">
+</head>
+
 <body>
+    <p>
+        <strong> Grammar for Arithmatic Expression </strong> <Br>
+        EXP ::= EXP + TERM | EXP - TERM | TERM<br>
+        TERM ::= TERM * FACTOR | TERM / FACTOR | FACTOR <br>
+        FACTOR ::= (EXP) | DIGIT <br>
+        DIGIT ::= 0|1|2|3
+    </p>
     Input string: <input id="input">
     <button type="button" onclick="start()">Submit</button>
     <p id="result"></p>
 </body>
-
 
 <script src="main.js"></script>
 
